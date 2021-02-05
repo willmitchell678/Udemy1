@@ -24,12 +24,16 @@ switchNameHandler = (newName) => {
   })
 }
 
-nameChangedHandler = (event) => {
+nameChangedHandler = (index, event) => {
+  // this.setState({
+  //   persons: [
+  //     { name: this.state.persons[0].name, age: 28 },
+  //     { name: event.target.value, age: 21 },
+  //     { name: 'James', age: 23 },
+  //   ]
+  // })
   this.setState({
-    persons: [
-      { name: 'Max', age: 28 },
-      { name: event.target.value, age: 21 },
-      { name: 'James', age: 23 },
+    persons: [ ...this.state.persons, this.state.persons[index].name=event.target.value
     ]
   })
 }
@@ -47,7 +51,7 @@ nameChangedHandler = (event) => {
      <div className="App">
        <h1>Hi, I'm a react app.</h1>
        <button
-        style={style}
+        className='App-button'
         onClick={this.switchNameHandler.bind(this, 'Maximilion')}>Switch Name</button>
        <Person 
        name={this.state.persons[0].name} 
@@ -56,10 +60,11 @@ nameChangedHandler = (event) => {
        <Person 
        name={this.state.persons[1].name} 
        age={this.state.persons[1].age}
-       changed={this.nameChangedHandler} >Favorite Game: MTG</Person>
+       changed={(event) => this.nameChangedHandler(1, event)} >Favorite Game: MTG</Person>
        <Person 
        name={this.state.persons[2].name} 
-       age={this.state.persons[2].age} />
+       age={this.state.persons[2].age}
+       changed={(event) => this.nameChangedHandler(2, event)} />
      </div>
     );
   }
